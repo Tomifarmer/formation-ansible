@@ -9,7 +9,7 @@
     - name: Check tomcat is running
       service:
         name: tomcat9
-        state: running
+        state: started
   
     - name: Ensure get sample.war
       get_url:
