@@ -1,0 +1,6 @@
+- name: "Survey install package playbook"
+  hosts: all
+  tasks:
+    - name: "Install package"
+      package:
+        name: "{{ survey_package }}"
