@@ -33,14 +33,13 @@
 
     - name: Deploy filebeat config modules
       copy:
-        remote_src: true
-        src: "/etc/filebeat/modules.d/{{ item.source }}"
+        src: "./templates/{{ item.source }}"
         dest: "/etc/filebeat/modules.d/{{ item.dest }}"
       loop:
-        - { source: "system.yml.disabled", dest: "system.yml" }
-        - { source: "auditd.yml.disabled", dest: "auditd.yml" }
-        - { source: "nginx.yml.disabled", dest: "nginx.yml" }
-        - { source: "tomcat.yml.disabled", dest: "tomcat.yml" }
+        - { source: "system.yml", dest: "system.yml" }
+        - { source: "auditd.yml", dest: "auditd.yml" }
+        - { source: "nginx.yml", dest: "nginx.yml" }
+        - { source: "tomcat.yml", dest: "tomcat.yml" }
       notify: "Restart filebeat"
     
   
