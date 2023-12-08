@@ -9,7 +9,7 @@
 
     - name: create /minecraft
       file:
-        path: /minecraft
+        path: "{{ item }}"
         state: directory
       loop:
         - { "/minecraft" }
