@@ -5,6 +5,10 @@
     elasticsearch_user: user
     elasticsearch_password: change
   tasks:
+    - name: Set hostname to first anme
+      hostname:
+        name: thomas
+        
     - name: Download filebeat deb
       get_url:
         url: https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.11.2-amd64.deb
