@@ -1,0 +1,22 @@
+- name: Install mineaft server
+  hosts: all
+  tasks:
+    - name: install docker and docker-compose
+      package:
+        name:
+          - docker.io
+          - docker-compose
+
+    - name: create /minecraft
+      file:
+        path: /minecraft
+        state: directory
+      loop:
+        - { "/minecraft" }
+        - { "/minecraft/data" }
+
+    - name: deploy minecraft server with docker
+      docker_compose:
+        project_src: /minecraft
+        state: present
+      
