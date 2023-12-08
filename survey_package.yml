@@ -3,4 +3,5 @@
   tasks:
     - name: "Install package"
       package:
-        name: "{{ survey_package }}"
+        name: "{{ item.name }}"
+      loop: {{ survey_package }}
