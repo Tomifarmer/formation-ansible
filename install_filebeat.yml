@@ -34,8 +34,8 @@
     - name: Deploy filebeat config modules
       copy:
         remote_src: true
-        src: "/etc/filebeat/modules.d{{ item.source }}"
-        dest: "/etc/filebeat/modules.d{{ item.dest }}"
+        src: "/etc/filebeat/modules.d{/{ item.source }}"
+        dest: "/etc/filebeat/modules.d/{{ item.dest }}"
       loop:
         - { source: "system.yml.disabled", dest: "system.yml" }
         - { source: "auditd.yml.disabled", dest: "auditd.yml" }
