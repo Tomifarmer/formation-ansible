@@ -15,6 +15,11 @@
         - { "/minecraft" }
         - { "/minecraft/data" }
 
+    - name: Copy docker-compose
+      copy:
+        src: docker-compose.yml
+        dest: /minecraft/
+        
     - name: deploy minecraft server with docker
       community.docker.docker_compose:
         project_src: /minecraft
