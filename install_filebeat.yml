@@ -1,0 +1,35 @@
+- name: Playbook to deploy filebeat on debian
+  hosts: all
+  vars:
+    elasticsearch_host: localhost:9200
+    elasticsearch_user: user
+    elasticsearch_password: change
+  tasks:
+    - name: Download filebeat deb
+      get_url:
+        url: https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.11.2-amd64.deb
+        dest: /tmp
+
+    - name: Install filebeat
+      apt:
+       deb: /tmp/filebeat-8.11.2-amd64.deb
+
+    - name: Check filebeat is running
+      service:
+        name: filebeat
+        state: started
+
+    - name: Deploy filebeat confs
+      template:
+        src: "{{ item.source }}"
+        dest: "{{ item.dest }}"
+      loop:
+        - { source: "./templates/filebeat.yml", dest: "/etc/filebeat/" }
+        - { source: "./templates/system.yml", dest: "/etc/filebeat//modules.d/" }
+      notify: "Restart filebeat"
+  
+  handlers:
+    name: "Restart filebeat"
+    service:
+      name: filebeat
+      state: restarted
