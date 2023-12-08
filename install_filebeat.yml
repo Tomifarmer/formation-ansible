@@ -23,14 +23,25 @@
         name: filebeat
         state: started
 
-    - name: Deploy filebeat confs
+    - name: Deploy filebeat config yml
       template:
         src: "{{ item.source }}"
         dest: "{{ item.dest }}"
       loop:
         - { source: "./templates/filebeat.yml", dest: "/etc/filebeat/" }
-        - { source: "./templates/system.yml", dest: "/etc/filebeat//modules.d/" }
       notify: "Restart filebeat"
+
+    - name: Deploy filebeat config modules
+      copy:
+        remote_src: "/etc/filebeat/{{ item.source }}"
+        dest: "/etc/filebeat/{{ item.dest }}"
+      loop:
+        - { source: "system.yml.disabled", dest: "system.yml" }
+        - { source: "auditd.yml.disabled", dest: "auditd.yml" }
+        - { source: "nginx.yml.disabled", dest: "nginx.yml" }
+        - { source: "tomcat.yml.disabled", dest: "tomcat.yml" }
+      notify: "Restart filebeat"
+    
   
   handlers:
     - name: "Restart filebeat"
