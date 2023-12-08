@@ -3,5 +3,5 @@
   tasks:
     - name: "Install package"
       package:
-        name: "{{ item.name }}"
+        name: "{{ item }}"
       loop: "{{ survey_package.split('\n') }}"
