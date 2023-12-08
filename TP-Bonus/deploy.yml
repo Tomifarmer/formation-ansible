@@ -1,0 +1,13 @@
+- name: Playbook to deploy python app - my-app
+  hosts: all
+  tasks:
+    - name: check my-app dependencies ar installed
+      package:
+        name: python3-flask
+
+    - name: Check my-app dire exist
+      file:
+        path: /home/vagrant/my-app
+        state: directory
+
+    - name: 
