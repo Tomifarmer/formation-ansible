@@ -16,7 +16,7 @@
         - { "/minecraft/data" }
 
     - name: deploy minecraft server with docker
-      docker_compose:
+      community.docker.docker_compose:
         project_src: /minecraft
         state: present
       
