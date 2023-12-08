@@ -33,7 +33,7 @@
       notify: "Restart filebeat"
   
   handlers:
-    name: "Restart filebeat"
+    - name: "Restart filebeat"
       service:
         name: filebeat
         state: restarted
