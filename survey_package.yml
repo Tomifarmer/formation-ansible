@@ -4,4 +4,4 @@
     - name: "Install package"
       package:
         name: "{{ item.name }}"
-      loop: "{{ survey_package }}"
+      loop: "{{ survey_package.split('\n') }}"
